@@ -1,0 +1,12 @@
+# Shumeiwork
+树莓第三次作业
+1.先创建一个Fruit类,在里面定义了两个变量name,imageid,然后在创建一个自定义的布局,用来显示水果,外层是一个线性布局,包含了image和TextView组成,
+由于图片长度比例不一致,用scaleType这个属性,让原来的图片保持原有比例填充满imageview然后用Recyclerview这个滚动控件,需要为它准备一个适配器
+FruitAdapter,继承RecyclerView.Adapter,并将泛型指定为FruitAdapter.ViewHolder,会重写三个方法,其中onBindViewHolder这个方法在每个子项被
+滚动到屏幕上的时候执行,将Recyclerview的子项进行赋值,由于传统的设置图片方式可能太大不压缩,造成内存溢出,所以这里用Glide.
+2.瀑布流布局是根据创建StaggeredGridLayoutManager的实例,然后在他的构造器中传入参数,第一个是把它分成多少列,第二个是布局的排列方向,这里用的是纵向排列.
+3.下拉刷新功能是先通过SwipeRefeshLayout这个布局包住Recyclerview,然后在主活动中实例化,通过refreshiFruits方法让线程沉睡两秒,表示刷新的时间,
+再由initFruits方法,随机显示图片,实现的原理是通过Random类,将事先使用addFruits方法将水果对象存入fruits数组(由于图片太少了,所以循环了两次),
+然后随机一个0到数组长度的数,再把fruits中的这个元素添加到list中,下拉刷新的时候,将线程再切换回主线程调用initFruits方法就能实现
+
+遇到的问题:感觉对适配器理解得不是很清楚,那部分的代码感觉思路有点模糊
